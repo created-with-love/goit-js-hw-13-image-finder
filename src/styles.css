@@ -23,8 +23,14 @@ img {
  }
 
 
+ .title {
+   padding: 10px;
+   font-size: 17px;
+   font-weight: 700;
+ }
+
  .gallery__load-btn {
-   padding: 10px 20px;
+   padding: 10px 40px;
    background-color: grey;
    border: 3px solid black;
    border-radius: 5px;
@@ -118,7 +124,6 @@ img {
     padding-left: 150px;
   }
  }
-
 
   
 

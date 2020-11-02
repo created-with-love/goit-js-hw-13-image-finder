@@ -60,34 +60,13 @@ function clearGallery() {
 function onLoadMoreBtnClick() {
   fetchImages();
 
-  const intViewportHeight = window.innerHeight;
   const options = {
-    top: intViewportHeight,
+    top: null,
     behavior: "smooth",
   };
 
+  options.top = window.pageYOffset + document.documentElement.clientHeight;
   setTimeout(() => {
-    window.scrollBy(options);
+    window.scrollTo(options);
   }, 1000);
-}
-
-function scrollToElement(elem) {
-  const loadBtnTopCoords = getCoords(elem).top;
-  const intViewportHeight = window.innerHeight;
-
-  console.log(loadBtnTopCoords);
-  const options = {
-    top: intViewportHeight,
-    behavior: "smooth",
-  };
-
-  options.loadBtnTopCoords += intViewportHeight;
-  window.scrollTo(options);
-}
-
-function getCoords(elem) {
-  let box = elem.getBoundingClientRect();
-  return {
-    top: box.top + window.pageYOffset,
-  };
 }
