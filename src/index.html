@@ -16,7 +16,22 @@
   <ul class="gallery">
     <!-- Список <li> с карточками изображений -->
   </ul>
-  <button type="button" class="gallery__load-btn">Load more</button>
+  
+  <div class="error_box"></div>
+
+      <button
+      type="button"
+      class="btn btn-primary button gallery__load-btn"
+      data-action="load-more"
+    >
+      <span
+        class="spinner-border spinner-border-sm spinner is-hidden"
+        role="status"
+        aria-hidden="true"
+      ></span>
+
+      <span class="label">Load more</span>
+    </button>
 </body>
 
 </html>
