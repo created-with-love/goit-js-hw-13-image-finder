@@ -24,7 +24,16 @@ function onImgSearch(e) {
   apiImageService.query = e.currentTarget.elements.query.value;
 
   if (apiImageService.query === "") {
-    return error("Input some request");
+    const errorMsg = document.querySelector(".pnotify");
+
+    if (!errorMsg) {
+      return error("Input some request");
+    }
+
+    if (errorMsg) {
+      errorMsg.classList.add("is-hidden");
+      return;
+    }
   }
 
   loadMoreBtn.show();
