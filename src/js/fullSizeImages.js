@@ -1,6 +1,5 @@
 import * as basicLightbox from "basiclightbox";
 import getRefs from "./get-refs";
-
 const refs = getRefs();
 refs.gallery.addEventListener("click", onImageClick);
 
