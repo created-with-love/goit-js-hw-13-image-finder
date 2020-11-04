@@ -8,10 +8,10 @@ export default class ApiImagesService {
     this.page = 1;
   }
 
-  fetchImages() {
+  async fetchImages() {
     const url = `${API_URL}${MAIN_SEARCH_SETTINGS}q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
 
-    return fetch(url).then((response) => {
+    return await fetch(url).then((response) => {
       this.incrementPage();
       return response.json();
     });
