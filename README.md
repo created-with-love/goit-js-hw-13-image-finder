@@ -1,1 +1,2 @@
-# goit-js-hw-13-image-finder
+# Application for images search.
+Created with tools: HTML/CSS, JS, Pixabay API, handlebars, Webpack, pnotify, basicLightbox
