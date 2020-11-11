@@ -2,7 +2,6 @@ import _ from "lodash";
 import imagesTemplate from "../templates/imageCart.hbs";
 import ApiImagesService from "./api-service";
 import getRefs from "./get-refs";
-import LoadMoreBtn from "./components/load-more-btn";
 import { error } from "@pnotify/core";
 import "@pnotify/core/dist/BrightTheme.css";
 import "@pnotify/core/dist/PNotify.css";
@@ -10,13 +9,8 @@ import "@pnotify/core/dist/PNotify.css";
 const refs = getRefs();
 
 const apiImageService = new ApiImagesService();
-const loadMoreBtn = new LoadMoreBtn({
-  selector: '[data-action="load-more"]',
-  hidden: true,
-});
 
 refs.form.addEventListener("submit", onImgSearch);
-refs.loadMoreBtn.addEventListener("click", onLoadMoreBtnClick);
 
 function onImgSearch(e) {
   e.preventDefault();
@@ -36,20 +30,16 @@ function onImgSearch(e) {
     }
   }
 
-  loadMoreBtn.show();
   apiImageService.resetPage();
   clearGallery();
   fetchImages();
 }
 
 function fetchImages() {
-  loadMoreBtn.disable();
-
   apiImageService
     .fetchImages()
     .then((images) => {
       renderImages(images.hits);
-      loadMoreBtn.enable();
     })
     .catch(onFetchError);
 }
@@ -79,3 +69,19 @@ function onLoadMoreBtnClick() {
     window.scrollTo(options);
   }, 1000);
 }
+
+const onEntry = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && apiImageService.query !== "") {
+      apiImageService.fetchImages().then((images) => {
+        renderImages(images.hits);
+        apiImageService.incrementPage();
+      });
+    }
+  });
+};
+
+const observer = new IntersectionObserver(onEntry, {
+  rootMargin: "150px",
+});
+observer.observe(refs.sentinel);
